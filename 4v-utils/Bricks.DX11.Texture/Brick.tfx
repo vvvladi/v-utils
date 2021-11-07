@@ -1,7 +1,7 @@
-//@author: vux
-//@help: template for texture fx
-//@tags: texture
-//@credits: 
+//@author: vvvlad
+//@help: template for texture fx - generating some briks
+//@tags: texture DX11
+
 
 Texture2D texture2d : PREVIOUS;
 
