@@ -1,0 +1,84 @@
+//@author: vvvlad
+//@help: simple , basic shape
+//@tags: texture
+//@credits: v 
+
+Texture2D texture2d : PREVIOUS;
+
+SamplerState linearSampler : IMMUTABLE
+{
+    Filter = MIN_MAG_MIP_LINEAR;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
+
+#define PI 3.14159265359
+#define TWO_PI 6.28318530718
+
+  int N = 7;
+float deform =.5;
+float rotate=0.;
+float scale = .5;
+float fade = 0.;
+float shad_mix = 5.;
+float2 BlurEdge = float2 (.75 , 1.0);
+float2 Pos = float2 (.5 , .5);
+
+
+
+
+
+struct psInput
+{
+	float4 p : SV_Position;
+	float2 uv : TEXCOORD0;
+};
+
+
+float4 PS(psInput input) : SV_Target
+{
+	float4 c = texture2d.Sample(linearSampler,input.uv);
+	
+float2 st = input.uv;
+  //st.x *= 1.5;
+  float3 color ;
+  float d = 0.0;
+float4 gl_FragColor;
+float2 pos = float2(Pos.x,Pos.y)-st;
+	
+  // Remap the space to -1. to 1.
+  st = (st *2.-1.)/scale+pos;
+
+
+
+  // Angle and radius from the current pixel
+  float a = atan2(st.x,st.y)+PI+rotate;
+  float r = (TWO_PI/float(N))/1.;
+
+  // Shaping function that modulate the distance
+  d = cos(floor(deform+a/r)*r-a)*length(st);
+
+  color = float(1.0-smoothstep(BlurEdge.x,BlurEdge.y,d))+fade;
+	
+	//Add some fade.. sort of, play with * / + - 
+  color *= float(d/shad_mix);
+
+  gl_FragColor = float4(color,1.0);
+gl_FragColor *= c;
+	
+	return gl_FragColor;
+}
+
+
+
+
+technique10 Basic_Shape
+{
+	pass P0
+	{
+		SetPixelShader(CompileShader(ps_4_0,PS()));
+	}
+}
+
+
+
