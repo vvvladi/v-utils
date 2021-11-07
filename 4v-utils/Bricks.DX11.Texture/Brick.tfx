@@ -1,0 +1,96 @@
+//@author: vux
+//@help: template for texture fx
+//@tags: texture
+//@credits: 
+
+Texture2D texture2d : PREVIOUS;
+
+SamplerState linearSampler : IMMUTABLE
+{
+    Filter = MIN_MAG_MIP_LINEAR;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
+
+/// >> v 
+
+
+float thick_X = .9;
+float3 Geom = float3(2.15, 0.65, 1.5);
+float shift = .5;
+
+float2 brickTile(float2 _st, float _zoom){
+    _st *= _zoom;
+
+    //sifting 
+    _st.x += step(1., fmod(_st.y,2.)) * shift;
+
+    return frac(_st);
+}
+
+float box(float2 _st, float2 _size){
+    _size = float(0.5)-_size*0.5;
+    float2 uv = smoothstep(_size,_size+float(1e-4),_st);
+    uv *= smoothstep(_size,_size+float(1e-4),float(1.0)-_st);
+    return uv.x*uv.y;
+}
+
+
+
+
+//// << v
+
+struct psInput
+{
+	float4 p : SV_Position;
+	float2 uv : TEXCOORD0;
+};
+
+
+float4 PS(psInput input) : SV_Target
+{
+	float4 c = texture2d.Sample(linearSampler,input.uv);
+	
+	
+/// >> v
+
+	float2 st = input.uv;
+    float3 color = float(0.);
+    float4 render ;
+//bric size etc
+
+    st /= float2(Geom.x,Geom.y)/Geom.z;
+
+    // tiling
+    st = brickTile(st,5.);
+
+    color = float(box(st,float2(thick_X, .9)));
+
+    // Uncomment to see the space coordinates
+    
+	// color = float3(st,0.0);
+
+  
+	
+	
+	
+	render = float4(color,1.0);
+	
+	render *=c;
+	
+	
+	
+/// << v	
+	return render;
+}
+
+technique10 Brick
+{
+	pass P0
+	{
+		SetPixelShader(CompileShader(ps_4_0,PS()));
+	}
+}
+
+
+

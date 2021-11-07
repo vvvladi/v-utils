@@ -1,0 +1,153 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv50beta35.8.dtd" >
+   <PATCH nodename="C:\Users\v\Desktop\HLSL-WORKS\Bricks\bricks(help).v4p" scrollx="30" scrolly="-360" systemname="bricks (help)" filename="C:\Users\v\Desktop\HLSL-WORKS\Bricks\bricks(help).v4p">
+   <BOUNDS type="Window" left="3195" top="4140" width="11610" height="11475">
+   </BOUNDS>
+   <NODE systemname="Brick (DX11.TextureFX)" filename="Brick.tfx" nodename="Brick (DX11.TextureFX)" componentmode="Hidden" id="0">
+   <BOUNDS type="Node" left="2385" top="2400" width="3840" height="270">
+   </BOUNDS>
+   <PIN pinname="Texture Out" visible="1">
+   </PIN>
+   <PIN pinname="u_time" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="thick" slicecount="1" values="0.97">
+   </PIN>
+   <PIN pinname="GeomXYZ" visible="1">
+   </PIN>
+   <PIN pinname="thick_X" slicecount="1" values="0.87">
+   </PIN>
+   <PIN pinname="shift" visible="1">
+   </PIN>
+   <PIN pinname="Texture In" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Technique" slicecount="1" values="Brick">
+   </PIN>
+   </NODE>
+   <NODE systemname="Preview (DX11.Texture)" filename="%VVVV%\packs\dx11\nodes\plugins\base\VVVV.DX11.Nodes.dll" nodename="Preview (DX11.Texture)" componentmode="InAWindow" id="1">
+   <BOUNDS type="Node" left="4845" top="4110" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="4845" top="4110" width="6000" height="4500">
+   </BOUNDS>
+   <BOUNDS type="Window" left="16875" top="1245" width="10365" height="8760">
+   </BOUNDS>
+   <PIN pinname="Texture In" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Texture Out" dstnodeid="1" dstpinname="Texture In">
+   <LINKPOINT x="2400" y="4320">
+   </LINKPOINT>
+   <LINKPOINT x="4515" y="4320">
+   </LINKPOINT>
+   <LINKPOINT x="4515" y="3630">
+   </LINKPOINT>
+   </LINK>
+   <NODE nodename="Vector (3D Join)" id="5" systemname="Vector (3d Join)">
+   <PIN pinname="X" slicecount="1" visible="1" values="2.15">
+   </PIN>
+   <PIN pinname="Y" visible="1">
+   </PIN>
+   <PIN pinname="Z" visible="1">
+   </PIN>
+   <BOUNDS type="Node" left="4905" top="1965" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="XYZ" visible="1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="6" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="4575" top="1485" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="4575" top="1485" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="1.43">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="X">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="6" srcpinname="Y Output Value" dstnodeid="5" dstpinname="X">
+   </LINK>
+   <NODE systemname="IOBox (Value Advanced)" nodename="IOBox (Value Advanced)" componentmode="InABox" id="9">
+   <BOUNDS type="Node" left="5070" top="1110" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="5070" top="1110" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" values="0.77">
+   </PIN>
+   <PIN pinname="Y Output Value" visible="1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Y">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="9" srcpinname="Y Output Value" dstnodeid="5" dstpinname="Y">
+   </LINK>
+   <NODE systemname="IOBox (Value Advanced)" nodename="IOBox (Value Advanced)" componentmode="InABox" id="10">
+   <BOUNDS type="Node" left="5475" top="1590" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="5475" top="1590" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" values="3.44">
+   </PIN>
+   <PIN pinname="Y Output Value" visible="1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Z">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="10" srcpinname="Y Output Value" dstnodeid="5" dstpinname="Z">
+   </LINK>
+   <LINK srcnodeid="5" srcpinname="XYZ" dstnodeid="0" dstpinname="GeomXYZ">
+   </LINK>
+   <PACK Name="dx11" Version="1.0.5">
+   </PACK>
+   <PACK Name="vvvv-Message" Version="2.9.10">
+   </PACK>
+   <PACK Name="addonpack" Version="35.0.0">
+   </PACK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="11">
+   <BOUNDS type="Box" left="5130" top="195" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="5130" top="195" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="0.57">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="11" srcpinname="Y Output Value" dstnodeid="0" dstpinname="shift">
+   </LINK>
+   <NODE systemname="Perlin (DX11.TextureFX)" filename="%VVVV%\packs\dx11\nodes\texture11\Source\Perlin.tfx" nodename="Perlin (DX11.TextureFX)" componentmode="Hidden" id="12">
+   <BOUNDS type="Node" left="1440" top="1500" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Texture Out" visible="1">
+   </PIN>
+   <PIN pinname="Z" slicecount="1" values="-0.62">
+   </PIN>
+   <PIN pinname="Default SizeXY" slicecount="2" values="2000,2000">
+   </PIN>
+   <PIN pinname="Color2" visible="1">
+   </PIN>
+   <PIN pinname="RandomSeed" slicecount="1" values="0.02">
+   </PIN>
+   <PIN pinname="Amplitude" slicecount="1" values="0.32">
+   </PIN>
+   </NODE>
+   <NODE systemname="RGB (Color Join)" nodename="RGB (Color Join)" componentmode="Hidden" id="13">
+   <BOUNDS type="Node" left="2265" top="855" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Green" slicecount="1" values="1.44">
+   </PIN>
+   <PIN pinname="Red" slicecount="1" values="2.32">
+   </PIN>
+   <PIN pinname="Blue" slicecount="1" values="1.02">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="13" srcpinname="Output" dstnodeid="12" dstpinname="Color2">
+   </LINK>
+   <LINK srcnodeid="12" srcpinname="Texture Out" dstnodeid="0" dstpinname="Texture In">
+   </LINK>
+   </PATCH>
