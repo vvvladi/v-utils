@@ -1,0 +1,91 @@
+//@author: vux
+//@help: template for texture fx
+//@tags: texture
+//@credits: as described by http://patriciogonzalezvivo.com/
+
+Texture2D texture2d : PREVIOUS;
+
+SamplerState linearSampler : IMMUTABLE
+{
+    Filter = MIN_MAG_MIP_LINEAR;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
+
+float sides = 3.;
+float scale = 5.;
+float2 P = float2(.5, .5);
+
+struct psInput
+{
+	float4 p : SV_Position;
+	float2 uv : TEXCOORD0;
+};
+
+
+float4 PS(psInput input) : SV_Target
+{
+	float4 c = texture2d.Sample(linearSampler,input.uv);
+	
+	
+	
+	
+	float4  Frag_Col;
+	  float2 uv = input.uv;
+//uv *=1.5;
+    float3 color = float3(0.,0.,0.);
+
+    float2 pos = float2(P.x,P.y)-uv;
+
+    float r = length(pos)*scale;
+    float a = atan2(pos.y,pos.x);
+
+    float f = cos(a*sides);
+  
+	
+	
+
+
+
+// f = abs(cos(a*sides));
+    // f = abs(cos(a*2.5))*.5+.3;
+     // f = abs(cos(a*12.)*sin(a*3.))*.8+.1;
+    // f = smoothstep(-.5,1., cos(a*10.))*0.2+0.5;
+
+    color = float( 1.-smoothstep(f,f+0.02,r) );
+
+    Frag_Col = float4(color, 1.0);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	return Frag_Col;
+}
+
+technique10 Process
+{
+	pass P0
+	{
+		SetPixelShader(CompileShader(ps_4_0,PS()));
+	}
+}
+
+
+
